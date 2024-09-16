@@ -28,7 +28,7 @@ def test_update_pet():
 
 def test_update_non_existent_pet():
     api = API()
-    updated_pet = api.update_pet(pet_id=999999, pet_name="NonExistent")
+    updated_pet = api.update_pet(pet_id=2, pet_name="NonExistent")
     logger.info(f"Update non-existent pet response: {updated_pet.text}")
     assert updated_pet.status_code == 404, f"Expected status code 404 for non-existent pet. Got {updated_pet.status_code} status code"
 
@@ -58,7 +58,7 @@ def test_check_pet():
 
 def test_check_non_existent_pet():
     api = API()
-    pet = api.check_pet(pet_id=999999)
+    pet = api.check_pet(pet_id=2)
     logger.info(f"Check non-existent pet response: {pet.text}")
     assert pet.status_code == 404, f"Expected status code 404 for non-existent pet. Got {pet.status_code} status code"
 
@@ -87,7 +87,7 @@ def test_remove_pet():
 
 def test_remove_non_existent_pet():
     api = API()
-    remove_response = api.remove_pet(pet_id=999999)
+    remove_response = api.remove_pet(pet_id=2)
     logger.info(f"Remove non-existent pet response: {remove_response.text}")
     assert remove_response.status_code == 404, f"Expected status code 404 for non-existent pet. Got {remove_response.status_code} status code"
 
@@ -105,7 +105,7 @@ def test_upload_image_non_existent_pet():
     api = API()
     with open('files/Cane_corso.png', 'rb') as file:
         files = {'file': file}
-        response = api.upload_image(pet_id=999999, files=files, additional_metadata="additional_test_data")
+        response = api.upload_image(pet_id=2, files=files, additional_metadata="additional_test_data")
         logger.info(f"Upload response: {response.text}")
         assert response.status_code == 404, f"Expected status code 404. Got {response.status_code} status code"
 
