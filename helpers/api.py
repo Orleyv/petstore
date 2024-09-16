@@ -130,24 +130,24 @@ class API:
         response = self._request(
             method="POST",
             url=f"/v2/pet/{pet_id}",
-            data=data,  # Send data as form data
-            headers=headers,  # Use updated headers
+            data=data,
+            headers=headers,
             host=HOST
         )
 
         return response
 
     def upload_image(self, pet_id: int, files: dict, additional_metadata: str = None) -> requests.Response:
-        # Data for additional metadata if provided
+
         data = {"additionalMetadata": additional_metadata} if additional_metadata else {}
 
         return self._request(
             method="POST",
             url=f"/v2/pet/{pet_id}/uploadImage",
-            data=data,  # Send metadata in the request body (form-data)
-            files=files,  # This sends the actual file
+            data=data,
+            files=files,
             host=HOST,
-            headers=None  # Let 'requests' handle the 'Content-Type' and boundary
+            headers=None
         )
 
 
