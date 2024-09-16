@@ -139,7 +139,13 @@ class API:
 
     def upload_image(self, pet_id: int, files: dict, additional_metadata: str = None) -> requests.Response:
 
-        data = {"additionalMetadata": additional_metadata} if additional_metadata else {}
+        data = {}
+        if additional_metadata:
+            data['additionalMetadata'] = additional_metadata
+
+        headers = {
+            "Accept": "application/json"
+        }
 
         return self._request(
             method="POST",
@@ -147,11 +153,5 @@ class API:
             data=data,
             files=files,
             host=HOST,
-            headers=None
+            headers=headers
         )
-
-
-
-
-
-

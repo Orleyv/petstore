@@ -94,7 +94,6 @@ def test_remove_non_existent_pet():
 
 def test_upload_image():
     api = API()
-    # Positive case: Valid image upload
     with open('files/Cane_corso.png', 'rb') as file:
         files = {'file': file}
         response = api.upload_image(pet_id=666, files=files, additional_metadata="additional_test_data")
@@ -102,12 +101,13 @@ def test_upload_image():
         assert response.status_code == 200, f"Expected status code 200. Got {response.status_code} status code"
 
 
-def test_upload_image_negative():
+def test_upload_image_non_existent_pet():
     api = API()
-    # Negative case: Missing file
-    response = api.upload_image(pet_id=666, files={}, additional_metadata="additional_test_data")
-    logger.info(f"Negative upload response: {response.text}")
-    assert response.status_code == 400, f"Expected status code 400. Got {response.status_code} status code"
+    with open('files/Cane_corso.png', 'rb') as file:
+        files = {'file': file}
+        response = api.upload_image(pet_id=999999, files=files, additional_metadata="additional_test_data")
+        logger.info(f"Upload response: {response.text}")
+        assert response.status_code == 404, f"Expected status code 404. Got {response.status_code} status code"
 
 
 
